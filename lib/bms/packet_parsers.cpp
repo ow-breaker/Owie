@@ -14,7 +14,7 @@ inline int16_t int16FromNetworkOrder(const void* const p) {
 
 int openCircuitSocFromVoltage(float voltageVolts) {
   // kindly provided by biell@ in https://github.com/lolwheel/Owie/issues/1
-  return std::clamp((int)(99.9 / (0.8 + pow(1.24, (54 - voltageVolts))) - 10),
+  return std::clamp((int)(99.9 / (0.8 + pow(1.29, (54 - voltageVolts))) - 10),
                     1, 100);
 }
 
@@ -33,7 +33,7 @@ void BmsRelay::batteryPercentageParser(Packet& p) {
   }
   overridden_soc_percent_ = std::max(
       5,
-      openCircuitSocFromVoltage((filtered_total_voltage_millivolts_ / 1000.0) + 1.5));
+      openCircuitSocFromVoltage(filtered_total_voltage_millivolts_ / 1000.0));
       // adding + 1.5 to pump up the 'reported voltage' to make 100% more likely
   p.data()[0] = std::max(5, (int)overridden_soc_percent_);
 }
