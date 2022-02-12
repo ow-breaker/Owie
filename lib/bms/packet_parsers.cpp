@@ -33,7 +33,8 @@ void BmsRelay::batteryPercentageParser(Packet& p) {
   }
   overridden_soc_percent_ = std::max(
       5,
-      openCircuitSocFromVoltage(filtered_total_voltage_millivolts_ / 1000.0));
+      openCircuitSocFromVoltage((filtered_total_voltage_millivolts_ / 1000.0) + 1.5));
+      // adding + 1.5 to pump up the 'reported voltage' to make 100% more likely
   p.data()[0] = std::max(5, (int)overridden_soc_percent_);
 }
 
