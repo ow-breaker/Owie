@@ -69,6 +69,9 @@ void BmsRelay::currentParser(Packet& p) {
   } else {
     current_times_milliseconds_regenerated_ -= current_times_milliseconds;
   }
+
+  //current warning detection goes here
+
 }
 
 void BmsRelay::bmsSerialParser(Packet& p) {
